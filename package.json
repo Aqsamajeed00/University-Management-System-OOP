@@ -1,13 +1,14 @@
 {
-  "name": "sir-hamzah-practice",
+  "name": "university_management_system",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Aqsa Majeed",
   "license": "ISC",
   "dependencies": {
     "inquirer": "^9.2.23"
