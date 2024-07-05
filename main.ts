@@ -1,108 +1,116 @@
-class Person {
+class person{
     name:string;
     age:number;
 
-    constructor(name: string, age: number){
+    constructor(name:string, age:number){
         this.name = name;
-        this.age = age;
-
+        this.age = age
     }
-};
 
-class Student extends Person {
-    rollNumber: string;
-    courses: Course[] = [];
+}
 
-    constructor (name: string, age: number, rollNumber: string) {
-        super(name, age)
+class Student extends person{
+    rollNumber:string;
+    courses:Course[] = [];
+    constructor(name:string, age:number, rollNumber:string){
+        super(name,age);
         this.rollNumber = rollNumber
     }
 
-    registerForCourses(course: Course){
-        this.courses.push(course);
+    registerForCourses(course:Course){
+         this.courses.push(course)
     }
+}
 
-};
+class Instructor extends person {
+   private salary:number;
+    courses:Course[]=[]
 
-class Instructor extends Person {
-  private  salary: number;
-    courses: Course[] = [];
-
-    constructor(name: string, age: number, salary: number) {
-        super(name, age)
+    constructor(name:string, age:number,salary:number){
+        super(name,age);
         this.salary = salary;
     }
-    assignCourse(course: Course) {
-        this.courses.push(course);
-    }
+ 
     get Salary(){
-       return this.salary  
+        return this.salary
     }
 
-};
-
-
+    assignCourse(course:Course){
+      this.courses.push(course)
+    }
+  
+}
 
 class Course {
-    id: number;
-    name: string;
-    students: Student[] = []
-    instructors: Instructor[] = []
+    id:string;
+    name:string;
+    students:Student[]=[];
+    instructor!:Instructor;
 
-    constructor(id: number, name: string) {
-        this.id = id;
-        this.name = name
+    constructor(id:string,name:string){
+       this.id=id;
+       this.name=name;
     }
-    addStudent (std: Student) {
-        this.students.push(std)
-    
+    addStudent(student:Student){
+        this.students.push(student)
+        student.registerForCourses(this)
     }
-
-    setInstructor (instructor: Instructor) {
-        this.instructors.push(instructor)
-
+    setInstructor(instructor:Instructor){
+       this.instructor=instructor;
+       instructor.assignCourse(this)
     }
-};
-
+}
 
 class Department {
-    name: string;
-    courses: Course[] = [];
+    name:string;
+    courses:Course[] =[]
 
-    constructor(name: string) {
+    constructor(name:string){
         this.name = name;
     }
 
-    addCourse(course: Course) {
+    addCourse(course:Course){
         this.courses.push(course)
     }
 }
 
-const std1 = new Student("Aqsa", 18, "1234");
-const std2 = new Student ("Miral", 18, "1634");
+const student1 = new Student("hassan",18,"student1")
 
-const instructor1 = new Instructor("arham", 30, 10000)
-const instructor2 = new Instructor("usama", 32, 50000)
+// student1.registerForCourses("Metaverse")
+// console.log(student1.courses)
 
-const course1 = new Course (1, "Blockchain");
-const course2 = new Course (2, "Metaverse");
+const student2 = new Student("bilal",18,"student2")
 
-course1.addStudent(std1);
-course1.addStudent(std2);
-course2.addStudent(std1);
+console.log(student1)
+
+const instructor1 = new Instructor("aqsa",18,100000)
+
+// console.log(instructor1.age)
+// instructor1.assignCourse("Artificial Intelligence")
+// instructor1.assignCourse("Block Chain")
+// console.log(instructor1.courses)
 
 
+console.log(instructor1)
+
+const instructor2 = new Instructor("miraal",18,900000)
+
+const course1 = new Course("course1","metaverse")
+
+course1.addStudent(student1)
+course1.addStudent(student2)
 course1.setInstructor(instructor1)
-course2.setInstructor(instructor2)
 
-console.log(course1.students);
-console.log(std1.courses)
+console.log(course1)
 
-const d1 = new Department("Computer Science");
+// console.log(course1.students[0])
+// console.log(student1.courses)
+// console.log(course1.instructor)
 
-d1.addCourse(course1);
+const course2 = new Course("course2","blockchain")
 
-// console.log(d1.courses[0]);
+const department1 = new Department("Computer Science")
+department1.addCourse(course1)
+department1.addCourse(course2)
 
-
-
+console.log(department1)
